@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import "./App.css";
+import Worker from "workerize-loader!./worker" // eslint-disable-line import/no-webpack-loader-syntax
 
-import { spawn, Worker } from "threads";
 const workerMessage = (async () => {
-    const worker = await spawn(new Worker("./worker.js"));
+    const worker = new Worker();
     return await worker.getMessage();
 })();
 
 function App() {
     const [message, setMessage] = useState("...");
-
     workerMessage.then(x => setMessage(x));
     return <div className="App">Worker says "{message}"</div>;
 }

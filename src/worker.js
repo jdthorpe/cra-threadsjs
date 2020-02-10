@@ -1,7 +1,1 @@
-import { expose } from "threads/worker"
-
-expose({
-  getMessage() {
-    return "Hello World"
-  }
-})
+export const getMessage = () => "Hello World";
